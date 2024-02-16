@@ -33,25 +33,16 @@ router.post('/tweet', (req, res) => {
  
  
   router.get('/tweet', (req, res) => {  
-    const { username, firstname, message, createdAt, likes } = req.body;
-  
-    const newTweet = new Tweet({
-      username,
-      firstname,
-      message,
-      createdAt,
-      likes,
-    });
-  
-    newTweet.save()
-      .then(savedTweet => {
-        res.status(200).json(savedTweet);
+    Tweet.find()
+      .then(tweets => {
+        res.status(200).json(tweets);
       })
       .catch(error => {
         res.status(500).json({ message: error.message });
       });
-  });
- 
+});
+
+module.exports = router;
  
  
  
